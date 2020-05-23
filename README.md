@@ -11,3 +11,9 @@ You must have Node.js and npm installed on your machine. This project was built 
 
 - `cd` into the project folder and run `npm install`
 - Run `npm start`
+
+## Shortcuts
+- m - mute
+- f - fullscreen
+- p - toggle Pip
+- k - pause
