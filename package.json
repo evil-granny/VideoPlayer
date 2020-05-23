@@ -1,0 +1,18 @@
+{
+  "name": "videoplayer",
+  "version": "1.0.0",
+  "description": "Custom HTML5 Video tutorial",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx browser-sync start -s"
+  },
+  "keywords": [
+    "javascript",
+    "html5"
+  ],
+  "author": "Denys Ohorodnik <den.ohorodnik@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
