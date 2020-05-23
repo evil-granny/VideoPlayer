@@ -1,4 +1,3 @@
-// Select elements here
 const video = document.getElementById('video');
 const videoControls = document.getElementById('video-controls');
 const playButton = document.getElementById('play');
@@ -61,9 +60,6 @@ function toggleStop() {
   playIcon.src = "./icons/play.png"
 }
 
-
-// updatePlayButton updates the playback icon and tooltip
-// depending on the playback state
 function updatePlayButton() {
   playbackIcons.forEach(icon => icon.classList.toggle('hidden'));
 
@@ -74,8 +70,6 @@ function updatePlayButton() {
   }
 }
 
-// formatTime takes a time length in seconds and returns the time in
-// minutes and seconds
 function formatTime(timeInSeconds) {
   const result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
 
@@ -85,8 +79,6 @@ function formatTime(timeInSeconds) {
   };
 };
 
-// initializeVideo sets the video duration, and maximum value of the
-// progressBar
 function initializeVideo() {
   const videoDuration = Math.round(video.duration);
   seek.setAttribute('max', videoDuration);
@@ -96,24 +88,17 @@ function initializeVideo() {
   duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
 }
 
-// updateTimeElapsed indicates how far through the video
-// the current playback is by updating the timeElapsed element
 function updateTimeElapsed() {
   const time = formatTime(Math.round(video.currentTime));
   timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
   timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
 }
 
-// updateProgress indicates how far through the video
-// the current playback is by updating the progress bar
 function updateProgress() {
   seek.value = Math.floor(video.currentTime);
   progressBar.value = Math.floor(video.currentTime);
 }
 
-// updateSeekTooltip uses the position of the mouse on the progress bar to
-// roughly work out what point in the video the user will skip to if
-// the progress bar is clicked at that point
 function updateSeekTooltip(event) {
   const skipTo = Math.round((event.offsetX / event.target.clientWidth) * parseInt(event.target.getAttribute('max'), 10));
   seek.setAttribute('data-seek', skipTo)
@@ -123,8 +108,6 @@ function updateSeekTooltip(event) {
   seekTooltip.style.left = `${event.pageX - rect.left}px`;
 }
 
-// skipAhead jumps to a different point in the video when the progress bar
-// is clicked
 function skipAhead(event) {
   const skipTo = event.target.dataset.seek
     ? event.target.dataset.seek
@@ -134,8 +117,6 @@ function skipAhead(event) {
   seek.value = skipTo;
 }
 
-// updateVolume updates the video's volume
-// and disables the muted state if active
 function updateVolume() {
   if (video.muted) {
     video.muted = false;
@@ -144,8 +125,6 @@ function updateVolume() {
   video.volume = volume.value;
 }
 
-// updateVolumeIcon updates the volume icon so that it correctly reflects
-// the volume of the video
 function updateVolumeIcon() {
   volumeIcons.forEach(icon => {
     icon.classList.add('hidden');
@@ -163,9 +142,6 @@ function updateVolumeIcon() {
   }
 }
 
-// toggleMute mutes or unmutes the video when executed
-// When the video is unmuted, the volume is returned to the value
-// it was set to before the video was muted
 function toggleMute() {
   video.muted = !video.muted;
 
@@ -179,8 +155,6 @@ function toggleMute() {
   }
 }
 
-// animatePlayback displays an animation when
-// the video is played or paused
 function animatePlayback() {
     playbackAnimation.animate([
       {
@@ -196,9 +170,6 @@ function animatePlayback() {
     });
 }
 
-// toggleFullScreen toggles the full screen state of the video
-// If the browser is currently in fullscreen mode,
-// then it must be exited and vice versa.
 function toggleFullScreen() {
   if (document.fullscreenElement) {
     document.exitFullscreen();
@@ -210,8 +181,6 @@ function toggleFullScreen() {
   }
 }
 
-// updateFullscreenButton changes the icon of the full screen button
-// and tooltip to reflect the current full screen state of the video
 function updateFullscreenButton() {
   fullscreenIcons.forEach(icon => icon.classList.toggle('hidden'));
 
@@ -222,7 +191,6 @@ function updateFullscreenButton() {
   }
 }
 
-// togglePip toggles Picture-in-Picture mode on the video
 async function togglePip() {
   try {
     if (video !== document.pictureInPictureElement) {
@@ -240,8 +208,6 @@ async function togglePip() {
   }
 }
 
-// hideControls hides the video controls when not in use
-// if the video is paused, the controls must remain visible
 function hideControls() {
   if (video.paused) {
     return;
@@ -250,13 +216,10 @@ function hideControls() {
   videoControls.classList.add('hide');
 }
 
-// showControls displays the video controls
 function showControls() {
   videoControls.classList.remove('hide');
 }
 
-// keyboardShortcuts executes the relevant functions for
-// each supported shortcut key
 function keyboardShortcuts(event) {
   const { key } = event;
   switch(key) {
@@ -283,7 +246,6 @@ function keyboardShortcuts(event) {
   }
 }
 
-// Add eventlisteners here
 playButton.addEventListener('click', togglePlay);
 stopButton.addEventListener('click', toggleStop);
 video.addEventListener('play', updatePlayButton);
